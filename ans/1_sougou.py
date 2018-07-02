@@ -1,14 +1,12 @@
-import numpy as np
-
-
 def list_primes(n):
-    is_prime = np.ones(n + 1, dtype=np.bool)
-    is_prime[[0, 1]] = False
+    is_prime = [True] * (n + 1)
+    is_prime[0] = is_prime[1] = False
     d = 2
     while d * d <= n:
         if is_prime[d]:
-            is_prime[range(2 * d, n + 1, d)] = False
+            for i in range(2 * d, n + 1, d):
+                is_prime[i] = False
         d += 1
-    return np.arange(n + 1)[is_prime]
+    return [i for i in range(n + 1) if is_prime[i]]
 
 list_primes(100)
